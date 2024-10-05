@@ -1,0 +1,79 @@
+#!/bin/bash
+#####		CCAA管理脚本			#####
+#####		Author:xiaoz.me			#####
+#####		Update:2020-02-27		#####
+#############################################################
+#####   use service                                     #####
+#####   优化: crazypeace                                #####
+#####   Github: https://github.com/crazypeace/ccaa      #####
+#############################################################
+
+#导入环境变量
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin:/sbin
+export PATH
+
+aria2pid=$(pgrep 'aria2c')
+ccaa_web_pid=$(pgrep 'ccaa_web')
+filebrowser_pid=$(pgrep 'filebrowser')
+
+#如果变量不存在
+if [ ! $1 ]
+	then
+
+echo '...CCAA管理脚本用法...
+#查看ccaa状态
+  ccaa status
+#启动ccaa
+  ccaa start
+#停止ccaa
+  ccaa stop
+#重启ccaa
+  ccaa restart
+#查看当前版本
+  ccaa -v'
+
+	bash <(curl -Lsk https://raw.githubusercontent.com/crazypeace/ccaa/master/ccaa.sh)
+	exit
+fi
+
+case $1 in
+	'start')
+		service aria2 start
+		service ccaa_web start
+		service filebrowser start
+		exit
+	;;
+	'stop')
+		service aria2 stop
+		service ccaa_web stop
+		service filebrowser stop
+		exit
+	;;
+	'restart')
+		service aria2 restart
+		service ccaa_web restart
+		service filebrowser restart
+		exit
+	;;
+	'status')
+		if [ "$aria2pid" == "" ]
+			then
+				echo "Not running!"
+			else
+				echo '-----------------------------------------------'
+				cat /etc/ccaa/aria2.conf | grep 'rpc-secret='
+				echo "Aria2 is running,pid is ${aria2pid}."
+				echo "AriaNg is running,pid is ${ccaa_web_pid}."
+				echo "Filebrowser is running,pid is ${filebrowser_pid}."
+				echo '原版帮助文档: https://dwz.ovh/ccaa （必看）'
+				echo '-----------------------------------------------'
+		fi
+	;;
+	'-v')
+		cat /etc/ccaa/version.txt && echo ''
+	;;
+	*)
+		echo '参数错误！'
+		exit
+	;;
+esac

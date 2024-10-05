@@ -1,0 +1,11 @@
+[Unit]
+Description=Filebrowser
+After=network.target
+
+[Service]
+User=ccaa
+ExecStart=/usr/sbin/filebrowser -c /etc/ccaa/config.json
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

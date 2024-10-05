@@ -1,0 +1,11 @@
+[Unit]
+Description=aria2
+After=network.target
+
+[Service]
+User=ccaa
+ExecStart=/usr/bin/aria2c --conf-path=/etc/ccaa/aria2.conf
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,11 @@
+[Unit]
+Description=ccaa_web
+After=network.target
+
+[Service]
+User=ccaa
+ExecStart=/usr/sbin/ccaa_web
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
