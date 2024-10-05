@@ -129,21 +129,10 @@ function add_service() {
 	if [ -d "/etc/systemd/system" ]
 	then
 		cp /etc/ccaa/services/* /etc/systemd/system
-		systemctl daemon-reload
-  
-		file_list=$(ls /etc/ccaa/services)
-		for file in $file_list; do
-		  systemctl enable $file
-		done
+		systemctl restart aria2
+		systemctl restart ccaa_web
+		systemctl restart filebrowser
 	fi
-}
-
-#启动服务
-function start_service() {
-	file_list=$(ls /etc/ccaa/services)
-	for file in $file_list; do
-	  systemctl start $file
-	done
 }
 
 #设置账号密码
@@ -179,9 +168,6 @@ function setting(){
 
 	#注册服务
 	add_service
-
-	#启动服务
-	start_service
 
 	echo
 	echo '-------------------------------------------------------------'
