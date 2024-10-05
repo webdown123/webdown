@@ -129,9 +129,7 @@ function add_service() {
 	if [ -d "/etc/systemd/system" ]
 	then
 		cp /etc/ccaa/services/* /etc/systemd/system
-		systemctl restart aria2
-		systemctl restart ccaa_web
-		systemctl restart filebrowser
+		systemctl daemon-reload 
 	fi
 }
 
