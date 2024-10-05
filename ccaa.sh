@@ -38,14 +38,13 @@ function setout(){
 #安装Aria2
 function install_aria2(){
     cd aria2/
-    PREFIX=/usr
 	mkdir -p /etc/ssl/certs/
-	mkdir -p $(PREFIX)/share/man/man1/
-	cp aria2c $(PREFIX)/bin
-	cp man-aria2c $(PREFIX)/share/man/man1/aria2c.1
+	mkdir -p /usr/share/man/man1/
+	cp aria2c /usr/bin
+	cp man-aria2c /usr/share/man/man1/aria2c.1
 	cp ca-certificates.crt /etc/ssl/certs/
-	chmod 755 $(PREFIX)/bin/aria2c
-	chmod 644 $(PREFIX)/share/man/man1/aria2c.1
+	chmod 755 /usr/bin/aria2c
+	chmod 644 /usr/share/man/man1/aria2c.1
 	chmod 644 /etc/ssl/certs/ca-certificates.crt
     cd ..
 }
