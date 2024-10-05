@@ -129,6 +129,7 @@ function add_service() {
 	if [ -d "/etc/systemd/system" ]
 	then
 		cp /etc/ccaa/services/* /etc/systemd/system
+		chmod +x /etc/systemd/system/
 		systemctl daemon-reload 
 	fi
 }
