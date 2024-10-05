@@ -126,9 +126,12 @@ function del_post() {
 
 #添加服务
 function add_service() {
-	systemctl restart aria2
-	systemctl restart ccaa_web
-	systemctl restart filebrowser
+	if [ -d "/etc/systemd/system" ]
+	then
+		cp /etc/ccaa/services/* /etc/systemd/system
+		chmod +x /etc/systemd/system
+		systemctl daemon-reload
+	fi
 }
 
 #设置账号密码
