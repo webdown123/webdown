@@ -179,7 +179,7 @@ function setting(){
 	echo
 	echo '-------------------------------------------------------------'
 	echo -e "大功告成，请访问: http://${osip}:6080/"
-	echo -e "File Browser 用户名:}${filebrowserUser}"
+	echo -e "File Browser 用户名:${filebrowserUser}"
 	echo -e "File Browser 密码:admin"
 	echo -e "Aria2 RPC 密钥: ${secret}"
 	echo '-------------------------------------------------------------'
