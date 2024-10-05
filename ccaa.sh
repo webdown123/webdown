@@ -129,8 +129,16 @@ function add_service() {
 	if [ -d "/etc/systemd/system" ]
 	then
 		cp /etc/ccaa/services/* /etc/systemd/system
-		chmod +x /etc/systemd/system
 		systemctl daemon-reload
+
+		file_list=$(ls /etc/ccaa/services)
+		for file in $file_list; do
+		  systemctl enable $file
+		done
+
+		systemctl restart aria2
+		systemctl restart ccaa_web
+		systemctl restart filebrowser
 	fi
 }
 
